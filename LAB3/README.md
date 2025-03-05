@@ -32,7 +32,7 @@
 ![Контроль складких остатков (Логист)](https://github.com/ChirkovaDS/DeepSand/blob/dev/LAB3/SequenceLog.png)
 
 ## 4. Модель БД
-![]()
+![](https://github.com/ChirkovaDS/DeepSand/blob/dev/LAB3/%D0%91%D0%94.jpg)
 
 ## 5. Применение основных принципов разработки
 
