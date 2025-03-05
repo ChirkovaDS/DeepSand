@@ -1,5 +1,5 @@
 ## 1. Диаграмма системного контекста
-![](https://github.com/ChirkovaDS/DeepSand/blob/dev/LAB1/%D0%B4%D0%B8%D0%BF%D0%BB%D0%BE%D0%BCUML%D0%9B%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D0%BD%D1%82.jpg)
+![](https://github.com/ChirkovaDS/DeepSand/blob/dev/LAB2/%D0%A1%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%BD%D1%8B%D0%B8%CC%86%D0%9A%D0%BE%D0%BD%D1%82%D0%B5%D0%BA%D1%81%D1%82.jpg)
 
 **Описание:**  
 - Пользователи взаимодействуют с ИС через веб-интерфейс.  
@@ -7,7 +7,7 @@
 
 
 ## 2. Диаграмма контейнеров
-![](https://github.com/ChirkovaDS/DeepSand/blob/dev/LAB1/%D0%B4%D0%B8%D0%BF%D0%BB%D0%BE%D0%BCUML%D0%9B%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D0%BD%D1%82.jpg)
+![](https://github.com/ChirkovaDS/DeepSand/blob/dev/LAB2/%D0%94%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B8%CC%86%D0%BD%D0%B5%D1%80%D0%BE%D0%B2%20(1).jpg)
 
 **Описание назначения каждого контейнера:**
 
@@ -51,7 +51,7 @@
 
 
 ## 4. Диаграмма компонентов контейнеров «Сервис бизнес-логики» и «Аналитический сервис»
-![]([https://github.com/ChirkovaDS/DeepSand/blob/dev/LAB1/%D0%B4%D0%B8%D0%BF%D0%BB%D0%BE%D0%BCUML%D0%9B%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D0%BD%D1%82.jpg](https://github.com/ChirkovaDS/DeepSand/blob/dev/LAB2/%D0%94%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%20(2).jpg))
+![](https://github.com/ChirkovaDS/DeepSand/blob/dev/LAB2/%D0%94%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%20(2).jpg)
 
 **Элементы сервиса бизнес-логики:**
 
