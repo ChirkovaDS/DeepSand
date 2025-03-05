@@ -772,7 +772,7 @@ DELETE  `/api/v1/sandtypes?rawmaterialId={rawMaterialId}&typeId={typeId}`
 Для реализации использовался ASP .Net Core Web API.
 
 **Пример кода реализации**:  
-```сsharp
+```csharp
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -1170,164 +1170,7 @@ namespace DipSandApi
             }
         };
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Order>> GetOrders() => Ok(Orders);
-
-        [HttpGet("client/{clientId}")]
-        public ActionResult<IEnumerable<Order>> GetOrdersByClient(int clientId)
-        {
-            var clientOrders = Orders.Where(o => o.ClientId == clientId).ToList();
-            return Ok(clientOrders);
-        }
-
-        [HttpGet("{id}")]
-        public ActionResult<Order> GetOrder(int id)
-        {
-            var order = Orders.FirstOrDefault(o => o.Id == id);
-            if (order == null) return NotFound();
-            return Ok(order);
-        }
-
-        [HttpPost]
-        public ActionResult<Order> CreateOrder([FromBody] Order order)
-        {
-            order.Id = Orders.Any() ? Orders.Max(o => o.Id) + 1 : 1;
-            Orders.Add(order);
-            return CreatedAtAction(nameof(GetOrder), new { id = order.Id }, order);
-        }
-
-        [HttpPut("{id}")]
-        public ActionResult<Order> UpdateOrder(int id, [FromBody] Order updatedOrder)
-        {
-            var order = Orders.FirstOrDefault(o => o.Id == id);
-            if (order == null) return NotFound();
-            order.ClientId = updatedOrder.ClientId;
-            order.OrderDate = updatedOrder.OrderDate;
-            order.ExecutionDate = updatedOrder.ExecutionDate;
-            order.SupplyVolume = updatedOrder.SupplyVolume;
-            order.UpperFraction = updatedOrder.UpperFraction;
-            order.LowerFraction = updatedOrder.LowerFraction;
-            order.OrderAmount = updatedOrder.OrderAmount;
-            order.Status = updatedOrder.Status;
-            order.Comment = updatedOrder.Comment;
-            return Ok(order);
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult DeleteOrder(int id)
-        {
-            var order = Orders.FirstOrDefault(o => o.Id == id);
-            if (order == null) return NotFound();
-            Orders.Remove(order);
-            return NoContent();
-        }
-    }
-
-    [ApiController]
-    [Route("api/v1/sandtypes/rawmaterial/{rawMaterialId}")]
-    public class SandTypesController : ControllerBase
-    {
-        private static List<SandType> SandTypes = new List<SandType>
-        {
-            new SandType { Id = 1, RawMaterialId = 10, UpperFraction = 90, SandContent = 350 },
-            new SandType { Id = 2, RawMaterialId = 10, UpperFraction = 85, SandContent = 320 }
-        };
-
-        [HttpGet]
-        public ActionResult<IEnumerable<SandType>> GetSandTypes(int rawMaterialId)
-        {
-            var types = SandTypes.Where(s => s.RawMaterialId == rawMaterialId).ToList();
-            return Ok(types);
-        }
-
-        [HttpPost]
-        public ActionResult<SandType> CreateSandType(int rawMaterialId, [FromBody] SandType sandType)
-        {
-            sandType.RawMaterialId = rawMaterialId;
-            sandType.Id = SandTypes.Any() ? SandTypes.Max(s => s.Id) + 1 : 1;
-            SandTypes.Add(sandType);
-            return CreatedAtAction(nameof(GetSandTypes), new { rawMaterialId = rawMaterialId }, sandType);
-        }
-
-        [HttpPut]
-        public ActionResult<SandType> UpdateSandType(int rawMaterialId, [FromBody] SandType updatedSandType)
-        {
-            var sandType = SandTypes.FirstOrDefault(s => s.RawMaterialId == rawMaterialId && s.Id == updatedSandType.Id);
-            if (sandType == null) return NotFound();
-            sandType.UpperFraction = updatedSandType.UpperFraction;
-            sandType.SandContent = updatedSandType.SandContent;
-            return Ok(sandType);
-        }
-
-        [HttpDelete]
-        public IActionResult DeleteSandType(int rawMaterialId, [FromQuery] int typeId)
-        {
-            var sandType = SandTypes.FirstOrDefault(s => s.RawMaterialId == rawMaterialId && s.Id == typeId);
-            if (sandType == null) return NotFound();
-            SandTypes.Remove(sandType);
-            return NoContent();
-        }
-    }
-}
-
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace DipSandApi
-{
-    // Модель заказа
-    public class Order
-    {
-        public int Id { get; set; }
-        public int ClientId { get; set; }
-        public DateTime OrderDate { get; set; }
-        public DateTime ExecutionDate { get; set; }
-        public int SupplyVolume { get; set; }
-        public int UpperFraction { get; set; }
-        public int LowerFraction { get; set; }
-        public decimal OrderAmount { get; set; }
-        public string Status { get; set; }
-        public string Comment { get; set; }
-    }
-
-    // Модель типа песков
-    public class SandType
-    {
-        public int Id { get; set; }
-        public int RawMaterialId { get; set; }
-        public int UpperFraction { get; set; }
-        public int SandContent { get; set; } // грамм песка в килограмме сырья
-    }
-
-    // Контроллер для работы с заказами
-    [ApiController]
-    [Route("api/v1/orders")]
-    public class OrdersController : ControllerBase
-    {
-        // Используем in-memory хранилище для демонстрации
-        private static List<Order> Orders = new List<Order>
-        {
-            new Order 
-            { 
-                Id = 1, ClientId = 1, 
-                OrderDate = DateTime.Parse("2023-09-01T12:00:00Z"), 
-                ExecutionDate = DateTime.Parse("2023-09-05T12:00:00Z"), 
-                SupplyVolume = 500, UpperFraction = 80, LowerFraction = 40, 
-                OrderAmount = 100000, Status = "pending", Comment = "Urgent order" 
-            },
-            new Order 
-            { 
-                Id = 2, ClientId = 2, 
-                OrderDate = DateTime.Parse("2023-09-02T12:00:00Z"), 
-                ExecutionDate = DateTime.Parse("2023-09-06T12:00:00Z"), 
-                SupplyVolume = 300, UpperFraction = 75, LowerFraction = 35, 
-                OrderAmount = 60000, Status = "completed", Comment = "Standard order" 
-            }
-        };
-
-        // 22. Получение списка всех заказов
+        // 23. Получение списка всех заказов
         [HttpGet]
         public ActionResult<IEnumerable<Order>> GetOrders()
         {
@@ -1407,7 +1250,7 @@ namespace DipSandApi
             new SandType { Id = 2, RawMaterialId = 10, UpperFraction = 85, SandContent = 320 }
         };
 
-        // 34. Получение списка типов песков по id сырья
+        // 29. Получение списка типов песков по id сырья
         [HttpGet]
         public ActionResult<IEnumerable<SandType>> GetSandTypes(int rawMaterialId)
         {
@@ -1415,7 +1258,7 @@ namespace DipSandApi
             return Ok(types);
         }
 
-        // 36. Добавление типа песков по id сырья
+        // 30. Добавление типа песков по id сырья
         [HttpPost]
         public ActionResult<SandType> CreateSandType(int rawMaterialId, [FromBody] SandType sandType)
         {
@@ -1425,7 +1268,7 @@ namespace DipSandApi
             return CreatedAtAction(nameof(GetSandTypes), new { rawMaterialId = rawMaterialId }, sandType);
         }
 
-        // 37. Изменение типа песков по id сырья
+        // 31. Изменение типа песков по id сырья
         [HttpPut]
         public ActionResult<SandType> UpdateSandType(int rawMaterialId, [FromBody] SandType updatedSandType)
         {
@@ -1439,7 +1282,7 @@ namespace DipSandApi
             return Ok(sandType);
         }
 
-        // 38. Удаление типа песков по id сырья
+        // 32. Удаление типа песков по id сырья
         // Здесь используем Query-параметр для typeId
         [HttpDelete]
         public IActionResult DeleteSandType(int rawMaterialId, [FromQuery] int typeId)
@@ -1453,6 +1296,7 @@ namespace DipSandApi
         }
     }
 }
+
 ```
 
 
